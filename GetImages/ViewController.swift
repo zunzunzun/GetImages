@@ -7,14 +7,32 @@
 //
 
 import UIKit
+import Kanna
 
 class ViewController: UIViewController {
-
+  
+  let url = URL(string: "https://www.gettyimagesgallery.com/collection/sasha/")
+  
+  @IBOutlet weak var imageView: UIImageView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    NetWorkManager.shared.request(url: url!) { data, error in
+      if let error = error {
+        print(error)
+      }
+      if let data = data {
+        do {
+          let imageURL = try HTML(html: data, encoding: .utf8)
+          for item in imageURL.xpath("//img[@class='jq-lazy'") {
+            print(item)
+          }
+        } catch {
+          print("error")
+        }
+      }
+    }
   }
-
 
 }
 

@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+final class NetWorkManager {
+  static let shared = NetWorkManager()
+  
+  private init() { }
+  
+  func request(url: URL, completion: @escaping (Data?, Error?) -> Void) {
+    let session = URLSession(configuration: .default)
+    let task = session.dataTask(with: url) { data, response, error in
+      completion(data, error) 
+    }
+    task.resume()
+  }
+}
