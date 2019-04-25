@@ -24,8 +24,8 @@ class ViewController: UIViewController {
       if let data = data {
         do {
           let imageURL = try HTML(html: data, encoding: .utf8)
-          for item in imageURL.xpath("//img[@class='jq-lazy'") {
-            print(item)
+          for item in imageURL.xpath("//img[@class='jq-lazy']/@data-src") {
+            print(item.text)
           }
         } catch {
           print("error")
