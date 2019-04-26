@@ -9,10 +9,15 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+  @IBOutlet weak var imageView: UIImageView!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
+  }
+  
+  override func prepareForReuse() {
+    imageView.image = UIImage(named: "Loading")
+  }
+  
 }

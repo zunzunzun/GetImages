@@ -13,10 +13,12 @@ final class NetWorkManager {
   
   private init() { }
   
+  ///URL 주소의 데이터를 가져오는 메소드
   func request(url: URL, completion: @escaping (Data?, Error?) -> Void) {
     let session = URLSession(configuration: .default)
     let task = session.dataTask(with: url) { data, response, error in
-      completion(data, error) 
+      completion(data, error)
+      session.finishTasksAndInvalidate()
     }
     task.resume()
   }
